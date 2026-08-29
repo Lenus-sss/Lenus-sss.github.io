@@ -6,7 +6,6 @@
 
   <title>Lenus</title>
 
-  <!-- Thin, modern font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -15,10 +14,6 @@
   >
 
   <style>
-    /* -------------------------
-       Basic reset
-    -------------------------- */
-
     * {
       margin: 0;
       padding: 0;
@@ -33,25 +28,11 @@
 
     body {
       font-family: "Inter", sans-serif;
-      color: #151515;
+      color: #ffffff;
 
-      background:
-        radial-gradient(
-          circle at 15% 5%,
-          rgba(198, 218, 255, 0.16),
-          transparent 30%
-        ),
-        radial-gradient(
-          circle at 85% 90%,
-          rgba(205, 220, 250, 0.10),
-          transparent 28%
-        ),
-        #fafbfc;
+      /* 默认使用横屏图；宽高比不超过 1:1 时由媒体查询切换为竖屏图。 */
+      background: #000000 url("./BG_PC.png") center / contain no-repeat;
     }
-
-    /* -------------------------
-       Main page
-    -------------------------- */
 
     .page {
       min-height: 100vh;
@@ -71,65 +52,49 @@
       transform: translateY(-15px);
     }
 
-    /* -------------------------
-       Name
-    -------------------------- */
-
     .name {
-      font-size: clamp(42px, 6vw, 58px);
+      font-size: clamp(58px, 8vw, 88px);
 
       font-weight: 300;
       font-style: italic;
+      line-height: 1;
 
       letter-spacing: -2px;
 
-      margin-bottom: 14px;
+      margin-bottom: 16px;
+      color: #ffffff;
     }
 
-    /* -------------------------
-       Subtitle
-    -------------------------- */
-
     .subtitle {
-      font-size: clamp(17px, 2.4vw, 23px);
+      font-size: clamp(18px, 2.4vw, 24px);
 
       font-weight: 300;
 
       letter-spacing: -0.4px;
 
-      color: #393939;
-
-      margin-bottom: 32px;
+      margin-bottom: 34px;
+      color: #ffffff;
     }
-
-    /* -------------------------
-       Navigation
-    -------------------------- */
 
     .navigation {
       display: flex;
-
       justify-content: center;
       align-items: center;
-
       flex-wrap: wrap;
-
       gap: 12px;
     }
 
     .navigation a {
       min-width: 110px;
-
       padding: 9px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.88);
 
-      border: 1px solid rgba(20, 20, 20, 0.8);
-
-      color: #151515;
+      color: #ffffff;
 
       text-decoration: none;
 
       font-size: 15px;
-      font-weight: 300;
+      font-weight: 400;
 
       letter-spacing: 0.2px;
 
@@ -137,20 +102,19 @@
 
       transition:
         background 0.2s ease,
-        color 0.2s ease,
         transform 0.2s ease;
     }
 
     .navigation a:hover {
-      background: #151515;
       color: #ffffff;
-
+      background: rgba(255, 255, 255, 0.14);
       transform: translateY(-2px);
     }
 
-    /* -------------------------
-       Decorative dots
-    -------------------------- */
+    .navigation a:focus-visible {
+      outline: 2px solid #ffffff;
+      outline-offset: 3px;
+    }
 
     .dot {
       position: absolute;
@@ -159,8 +123,7 @@
       height: 4px;
 
       border-radius: 50%;
-
-      background: rgba(160, 198, 255, 0.38);
+      background: rgba(255, 255, 255, 0.34);
     }
 
     .dot-one {
@@ -178,9 +141,11 @@
       bottom: 17%;
     }
 
-    /* -------------------------
-       Mobile
-    -------------------------- */
+    @media (max-aspect-ratio: 1 / 1) {
+      body {
+        background-image: url("./BG_Phone.png");
+      }
+    }
 
     @media (max-width: 600px) {
       .content {
@@ -207,7 +172,6 @@
 
   <main class="page">
 
-    <!-- Decorative dots -->
     <span class="dot dot-one"></span>
     <span class="dot dot-two"></span>
     <span class="dot dot-three"></span>
@@ -217,7 +181,7 @@
       <h1 class="name">Lenus</h1>
 
       <p class="subtitle">
-        Game Client Developer
+        Game Client Engineer
       </p>
 
       <nav class="navigation">
