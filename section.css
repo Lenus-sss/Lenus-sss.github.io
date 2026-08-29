@@ -155,7 +155,7 @@ a:focus-visible {
   }
 }
 
-/* 经验页用照片承载内容面板，纯黑页面只负责留白和聚焦。 */
+/* 三类文章列表统一使用随笔背景，让卡片保持一致的视觉主题。 */
 .feature-body {
   min-height: 100vh;
   min-height: 100svh;
@@ -221,7 +221,7 @@ a:focus-visible {
   overflow: hidden;
   border: 0;
   border-radius: var(--corner-radius);
-  background: url("./BG_PC.png") center / cover no-repeat;
+  background: url("./BG_Essay.png") center / cover no-repeat;
 }
 
 .feature-panel-primary {

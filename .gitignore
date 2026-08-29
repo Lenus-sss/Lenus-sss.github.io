@@ -1,2 +1,7 @@
 # Jekyll 构建产物
 _site/
+
+# 本地启动脚本与 Jekyll 缓存无需上传
+/run-jekyll.bat
+.jekyll-cache/
+.jekyll-metadata
