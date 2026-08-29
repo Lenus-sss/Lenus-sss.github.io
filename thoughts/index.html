@@ -1,0 +1,48 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thoughts · Lenus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../section.css">
+</head>
+<body class="feature-body" data-title-en="Thoughts · Lenus" data-title-zh="思绪 · Lenus">
+  <main class="feature-page">
+    <div class="feature-title-wrap">
+      <h1 data-en="Thoughts" data-zh="思绪">Thoughts</h1>
+      <button class="language-toggle-leaf" type="button" data-language-toggle aria-label="Switch to Chinese">🍃</button>
+    </div>
+
+    <section class="feature-panels" data-language="en" aria-label="Thoughts content">
+      {% assign articles = site.thoughts | where: "lang", "en" %}
+      {% for article in articles reversed %}
+        <article class="feature-panel feature-panel-primary">
+          <div class="feature-copy">
+            <div class="feature-preview">{{ article.content | markdownify }}</div>
+            <a class="feature-read" href="{{ article.url | relative_url }}" data-en="Read" data-zh="阅读">Read</a>
+          </div>
+        </article>
+      {% endfor %}
+    </section>
+
+    <section class="feature-panels" data-language="zh" aria-label="思绪内容" hidden>
+      {% assign articles = site.thoughts | where: "lang", "zh" %}
+      {% for article in articles reversed %}
+        <article class="feature-panel feature-panel-primary">
+          <div class="feature-copy">
+            <div class="feature-preview">{{ article.content | markdownify }}</div>
+            <a class="feature-read" href="{{ article.url | relative_url }}" data-en="Read" data-zh="阅读">阅读</a>
+          </div>
+        </article>
+      {% endfor %}
+    </section>
+  </main>
+
+  <script src="../section-language.js"></script>
+</body>
+</html>

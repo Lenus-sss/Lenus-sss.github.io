@@ -1,0 +1,502 @@
+:root {
+  --corner-radius: clamp(12px, 0.8vw, 24px);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: clamp(24px, 4vw, 56px);
+  color: #ffffff;
+  font-family: "Times New Roman", "FangSong", "仿宋", "STFangsong", serif;
+
+  /* 背景跟随 1:1 宽高比分流，四个内页因此与主页保持相同的视觉规则。 */
+  background: #000000 url("./BG_PC.png") center / contain no-repeat fixed;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.34);
+}
+
+/* 所有内页的 Lenus 品牌名继续使用 Inter。 */
+.brand {
+  font-family: "Inter", sans-serif;
+  font-size: 26px;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.home-link,
+.section-nav a {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+.home-link {
+  padding: 7px 0;
+  border-bottom: 1px solid transparent;
+}
+
+.home-link:hover {
+  border-color: #ffffff;
+}
+
+.section-page {
+  width: min(980px, 100%);
+  margin: 0 auto;
+  padding: clamp(64px, 12vh, 150px) 0;
+}
+
+.kicker {
+  margin-bottom: 18px;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+}
+
+h1 {
+  /* Inter 没有中文字形，因此中文标题回退到相近的无衬线字体，正文仍保持仿宋。 */
+  font-family: "Inter", "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: clamp(64px, 12vw, 156px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+}
+
+.content-shell {
+  min-height: 1px;
+  margin-top: clamp(48px, 8vh, 92px);
+  background: rgba(255, 255, 255, 0.44);
+}
+
+.section-nav {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid rgba(255, 255, 255, 0.34);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.34);
+}
+
+.section-nav a {
+  padding: 15px 12px;
+  text-align: center;
+  transition: background 0.2s ease;
+}
+
+.section-nav a + a {
+  border-left: 1px solid rgba(255, 255, 255, 0.34);
+}
+
+.section-nav a:hover,
+.section-nav a[aria-current="page"] {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+a:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+@media (max-aspect-ratio: 1 / 1) {
+  body {
+    background-image: url("./BG_Phone.png");
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 24px;
+  }
+
+  .section-page {
+    padding: 72px 0;
+  }
+
+  h1 {
+    font-size: clamp(52px, 18vw, 82px);
+  }
+
+  .section-nav {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .section-nav a:nth-child(3) {
+    border-left: 0;
+  }
+
+  .section-nav a:nth-child(n + 3) {
+    border-top: 1px solid rgba(255, 255, 255, 0.34);
+  }
+}
+
+/* 经验页用照片承载内容面板，纯黑页面只负责留白和聚焦。 */
+.feature-body {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: block;
+  padding: clamp(28px, 3.2vw, 72px);
+  overflow-x: hidden;
+  background: #000000;
+}
+
+.feature-page {
+  width: min(82vw, 2200px);
+  margin: 0 auto;
+}
+
+.feature-title-wrap {
+  position: relative;
+  display: table;
+  margin: 0 auto clamp(40px, 4vw, 96px);
+}
+
+.feature-title-wrap h1 {
+  font-size: clamp(38px, 2.8vw, 88px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-transform: lowercase;
+}
+
+.language-toggle-leaf {
+  position: absolute;
+  top: -0.28em;
+  left: calc(100% + 0.3em);
+  padding: 0.12em;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: clamp(18px, 1.25vw, 40px);
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.language-toggle-leaf:hover {
+  opacity: 0.86;
+  transform: scale(1.1);
+}
+
+.language-toggle-leaf:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
+.feature-panels {
+  display: grid;
+  gap: clamp(32px, 3vw, 76px);
+}
+
+.feature-panel {
+  min-height: clamp(240px, 22vw, 560px);
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--corner-radius);
+  background: url("./BG_PC.png") center / cover no-repeat;
+}
+
+.feature-panel-primary {
+  display: grid;
+  place-items: center;
+}
+
+.feature-copy {
+  width: min(760px, 84%);
+  padding: clamp(24px, 3vw, 64px);
+  text-align: center;
+}
+
+.feature-preview h1 {
+  margin-bottom: clamp(10px, 1vw, 24px);
+  font-family: "Inter", "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: clamp(28px, 2.2vw, 64px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+.feature-preview h5 {
+  margin-bottom: clamp(24px, 2.2vw, 56px);
+  font-family: "Times New Roman", serif;
+  font-size: clamp(18px, 1.4vw, 42px);
+  font-weight: 300;
+  font-style: italic;
+}
+
+/* 卡片只提取 Markdown 的一级、五级标题，其余正文留到阅读页完整展示。 */
+.feature-preview > :not(h1):not(h5) {
+  display: none;
+}
+
+html[lang="zh-CN"] .feature-preview h5 {
+  font-family: "FangSong", "仿宋", "STFangsong", serif;
+}
+
+.feature-read {
+  min-width: clamp(150px, 12vw, 360px);
+  display: inline-block;
+  padding: clamp(10px, 0.8vw, 22px) clamp(24px, 2vw, 56px);
+  border: 0;
+  border-radius: var(--corner-radius);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.14);
+  font: inherit;
+  font-size: clamp(15px, 1vw, 30px);
+  font-weight: 400;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.feature-read:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+@media (max-width: 600px) {
+  .feature-body {
+    padding: 24px;
+  }
+
+  .feature-page {
+    width: 100%;
+  }
+
+  .feature-title-wrap {
+    margin-bottom: 36px;
+  }
+
+  .feature-panel {
+    min-height: 230px;
+    border-radius: var(--corner-radius);
+  }
+
+  .feature-copy {
+    width: 100%;
+    padding: 24px;
+  }
+}
+
+/* 账号页只展示四个入口，透明圆角热区让图标在复杂背景上仍有明确反馈。 */
+/* 阅读页把 Markdown 当作唯一正文来源：标题强调身份，其余内容优先保证长文可读性。 */
+.article-body {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: block;
+  padding: clamp(28px, 5vw, 96px);
+  background: #000000;
+}
+
+.article-page {
+  width: min(760px, 100%);
+  margin: 0 auto;
+}
+
+.article-language-link {
+  position: fixed;
+  top: clamp(20px, 3vw, 52px);
+  right: clamp(20px, 3vw, 52px);
+  z-index: 1;
+  padding: 0.15em;
+  font-size: clamp(20px, 1.5vw, 36px);
+  line-height: 1;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.article-language-link:hover {
+  opacity: 0.86;
+  transform: scale(1.1);
+}
+
+.markdown-body {
+  font-family: "Times New Roman", serif;
+  font-size: clamp(18px, 1.05vw, 24px);
+  line-height: 1.85;
+}
+
+html[lang="zh-CN"] .markdown-body {
+  font-family: "FangSong", "仿宋", "STFangsong", serif;
+}
+
+.markdown-body h1 {
+  margin-bottom: clamp(12px, 1.5vw, 28px);
+  font-family: "Inter", "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: clamp(48px, 5vw, 88px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.markdown-body h5 {
+  margin-bottom: clamp(44px, 6vw, 88px);
+  font-family: "Times New Roman", serif;
+  font-size: clamp(20px, 1.4vw, 30px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+html[lang="zh-CN"] .markdown-body h5 {
+  font-family: "FangSong", "仿宋", "STFangsong", serif;
+}
+
+.markdown-body p,
+.markdown-body ul,
+.markdown-body ol,
+.markdown-body blockquote,
+.markdown-body pre {
+  margin-bottom: 1.35em;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding-left: 1.5em;
+}
+
+.markdown-body a {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.markdown-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--corner-radius);
+}
+
+.markdown-body blockquote {
+  padding-left: 1em;
+  border-left: 2px solid rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.markdown-body code {
+  font-family: Consolas, monospace;
+  font-size: 0.9em;
+}
+
+@media (max-width: 600px) {
+  .article-body {
+    padding: 72px 24px 40px;
+  }
+
+  .article-language-link {
+    position: absolute;
+  }
+}
+
+.profiles-body {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: block;
+  padding: clamp(28px, 4vw, 72px);
+  background: #000000 url("./BG_PC.png") center / contain no-repeat fixed;
+}
+
+.profiles-page {
+  width: min(86vw, 1800px);
+  min-height: calc(100svh - clamp(56px, 8vw, 144px));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(72px, 11vh, 190px);
+  margin: 0 auto;
+}
+
+.profiles-title-wrap {
+  position: relative;
+  display: table;
+  margin: 0 auto;
+}
+
+.profiles-title-wrap h1 {
+  font-size: clamp(38px, 2.8vw, 88px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.profile-links {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(20px, 4vw, 92px);
+}
+
+.profile-link {
+  min-height: clamp(110px, 10vw, 240px);
+  display: grid;
+  place-items: center;
+  padding: clamp(20px, 2vw, 48px);
+  border-radius: var(--corner-radius);
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.profile-link:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-4px);
+}
+
+.profile-link img {
+  width: clamp(27px, 2.5vw, 64px);
+  height: clamp(27px, 2.5vw, 64px);
+}
+
+@media (max-aspect-ratio: 1 / 1) {
+  .profiles-body {
+    background-image: url("./BG_Phone.png");
+  }
+}
+
+@media (max-width: 600px) {
+  .profiles-body {
+    padding: 24px;
+  }
+
+  .profiles-page {
+    width: 100%;
+    gap: 64px;
+  }
+
+  .profile-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .profile-link {
+    min-height: 120px;
+  }
+}

@@ -1,0 +1,32 @@
+title: Lenus
+url: https://lenus-sss.github.io
+baseurl: ""
+markdown: kramdown
+
+collections:
+  experience:
+    output: true
+    permalink: /experience/:name/
+  research:
+    output: true
+    permalink: /research/:name/
+  thoughts:
+    output: true
+    permalink: /thoughts/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: experience
+    values:
+      layout: article
+  - scope:
+      path: ""
+      type: research
+    values:
+      layout: article
+  - scope:
+      path: ""
+      type: thoughts
+    values:
+      layout: article
