@@ -21,24 +21,22 @@
     <section class="feature-panels" data-language="en" aria-label="Thoughts content">
       {% assign articles = site.thoughts | where: "lang", "en" %}
       {% for article in articles reversed %}
-        <article class="feature-panel feature-panel-primary">
+        <a class="feature-panel feature-panel-primary" href="{{ article.url | relative_url }}" aria-label="Read article">
           <div class="feature-copy">
             <div class="feature-preview">{{ article.content | markdownify }}</div>
-            <a class="feature-read" href="{{ article.url | relative_url }}" data-en="Read" data-zh="阅读">Read</a>
           </div>
-        </article>
+        </a>
       {% endfor %}
     </section>
 
     <section class="feature-panels" data-language="zh" aria-label="思绪内容" hidden>
       {% assign articles = site.thoughts | where: "lang", "zh" %}
       {% for article in articles reversed %}
-        <article class="feature-panel feature-panel-primary">
+        <a class="feature-panel feature-panel-primary" href="{{ article.url | relative_url }}" aria-label="阅读文章">
           <div class="feature-copy">
             <div class="feature-preview">{{ article.content | markdownify }}</div>
-            <a class="feature-read" href="{{ article.url | relative_url }}" data-en="Read" data-zh="阅读">阅读</a>
           </div>
-        </article>
+        </a>
       {% endfor %}
     </section>
   </main>
