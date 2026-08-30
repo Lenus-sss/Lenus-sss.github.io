@@ -1,0 +1,6 @@
+<!-- 邮箱图标使用明确的白色描边，即使页面专用样式尚未加载也能保持正常外观。 -->
+<svg fill="none" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="#FFFFFF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+  <title>Email</title>
+  <rect x="2.5" y="5" width="19" height="14" rx="2"/>
+  <path d="m3.5 7 8.5 6 8.5-6"/>
+</svg>

@@ -309,18 +309,27 @@ html[lang="zh-CN"] .feature-preview h5 {
     margin-bottom: 36px;
   }
 
-  .feature-panel {
+  .feature-panel,
+  .feature-panel:hover {
     min-height: 83px;
+    border-color: rgba(255, 255, 255, 0.28);
     border-radius: var(--corner-radius);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+      0 0 18px rgba(255, 255, 255, 0.06);
   }
 
   .feature-copy {
     width: 100%;
     padding: 8px 24px;
   }
+
+  .feature-preview h1 {
+    font-size: clamp(18px, 4.6vw, 21px);
+  }
 }
 
-/* 账号页只展示四个入口，透明圆角热区让图标在复杂背景上仍有明确反馈。 */
+/* 账号页展示五个入口，透明圆角热区让图标在复杂背景上仍有明确反馈。 */
 /* 阅读页把 Markdown 当作唯一正文来源：标题强调身份，其余内容优先保证长文可读性。 */
 .article-body {
   min-height: 100vh;
@@ -375,7 +384,7 @@ html[lang="zh-CN"] .markdown-body {
   margin-bottom: clamp(14px, 1.4vw, 26px);
   font-family: "Inter", "Microsoft YaHei", "PingFang SC", sans-serif;
   font-size: clamp(40px, 3.2vw, 64px);
-  font-weight: 300;
+  font-weight: 400;
   font-style: italic;
   line-height: 1.08;
   letter-spacing: -0.035em;
@@ -461,7 +470,7 @@ html[lang="zh-CN"] .markdown-body h5 {
 
   .markdown-body h1 {
     /* 手机屏幕优先保证日期类长标题完整呈现，避免只把最后一个字挤到下一行。 */
-    font-size: clamp(30px, 8vw, 36px);
+    font-size: clamp(24px, 6.5vw, 30px);
     line-height: 1.15;
   }
 
@@ -524,28 +533,6 @@ html[lang="zh-CN"] .markdown-body h5 {
 .profile-link img {
   width: clamp(27px, 2.5vw, 64px);
   height: clamp(27px, 2.5vw, 64px);
-}
-
-.profile-email {
-  appearance: none;
-  border: 0;
-  color: inherit;
-  background: transparent;
-  font: inherit;
-  cursor: pointer;
-}
-
-.profile-email:focus-visible {
-  outline: 2px solid #ffffff;
-  outline-offset: 3px;
-}
-
-.profile-email-icon {
-  width: clamp(27px, 2.5vw, 64px);
-  height: clamp(27px, 2.5vw, 64px);
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.4;
 }
 
 /* 复制提示固定在视口顶部，以淡入淡出代替浏览器 alert，也不会推动页面布局。 */
