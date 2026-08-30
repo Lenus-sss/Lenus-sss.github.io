@@ -29,9 +29,51 @@
       <a class="profile-link" href="https://www.zhihu.com/people/39-20-44-10" aria-label="知乎">
         <img src="../assets/icons/zhihu.svg" alt="">
       </a>
+      <button
+        class="profile-link profile-email"
+        type="button"
+        data-copy-email="1391604748@qq.com"
+        aria-label="Copy email address"
+      >
+        <svg class="profile-email-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="2.5" y="5" width="19" height="14" rx="2"></rect>
+          <path d="m3.5 7 8.5 6 8.5-6"></path>
+        </svg>
+      </button>
     </nav>
   </main>
 
+  <div class="copy-toast" data-copy-toast role="status" aria-live="polite" aria-atomic="true">
+    <span class="copy-toast-check" aria-hidden="true">✓</span>
+    <span data-copy-message data-en="Copied" data-zh="已复制">Copied</span>
+  </div>
+
   <script src="../section-language.js"></script>
+  <script>
+    const emailButton = document.querySelector("[data-copy-email]");
+    const copyToast = document.querySelector("[data-copy-toast]");
+    const copyMessage = document.querySelector("[data-copy-message]");
+    let copyToastTimer;
+
+    // 点击后只让自定义提示淡入淡出，不调用浏览器默认弹窗打断页面体验。
+    function showCopyToast(messageEn, messageZh) {
+      copyMessage.dataset.en = messageEn;
+      copyMessage.dataset.zh = messageZh;
+      copyMessage.textContent = document.documentElement.lang === "zh-CN" ? messageZh : messageEn;
+      copyToast.classList.add("is-visible");
+      clearTimeout(copyToastTimer);
+      copyToastTimer = setTimeout(() => copyToast.classList.remove("is-visible"), 1800);
+    }
+
+    emailButton.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(emailButton.dataset.copyEmail);
+        showCopyToast("Copied", "已复制");
+      } catch {
+        showCopyToast("Copy failed", "复制失败");
+      }
+    });
+  </script>
+  <script src="../disable-copy.js"></script>
 </body>
 </html>

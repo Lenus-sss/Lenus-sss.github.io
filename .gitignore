@@ -5,3 +5,8 @@ _site/
 /run-jekyll.bat
 .jekyll-cache/
 .jekyll-metadata
+
+# 本地文章导入与 Codex 翻译工具
+/import-article.bat
+/import-article.ps1
+/.import-article.translation.tmp

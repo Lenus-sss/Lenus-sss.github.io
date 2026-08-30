@@ -7,9 +7,9 @@ collections:
   experience:
     output: true
     permalink: /experience/:name/
-  research:
+  experiments:
     output: true
-    permalink: /research/:name/
+    permalink: /experiments/:name/
   thoughts:
     output: true
     permalink: /thoughts/:name/
@@ -22,7 +22,7 @@ defaults:
       layout: article
   - scope:
       path: ""
-      type: research
+      type: experiments
     values:
       layout: article
   - scope:

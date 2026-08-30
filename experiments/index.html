@@ -5,21 +5,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Research · Lenus</title>
+  <title>Experiments · Lenus</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../section.css">
 </head>
-<body class="feature-body" data-title-en="Research · Lenus" data-title-zh="研究 · Lenus">
+<body class="feature-body" data-title-en="Experiments · Lenus" data-title-zh="实验 · Lenus">
   <main class="feature-page">
     <div class="feature-title-wrap">
-      <h1 data-en="Research" data-zh="研究">Research</h1>
+      <h1 data-en="Experiments" data-zh="实验">Experiments</h1>
       <button class="language-toggle-leaf" type="button" data-language-toggle aria-label="Switch to Chinese">🍃</button>
     </div>
 
-    <section class="feature-panels" data-language="en" aria-label="Research content">
-      {% assign articles = site.research | where: "lang", "en" %}
+    <section class="feature-panels" data-language="en" aria-label="Experiments content">
+      {% assign articles = site.experiments | where: "lang", "en" %}
       {% for article in articles reversed %}
         <a class="feature-panel feature-panel-primary" href="{{ article.url | relative_url }}" aria-label="Read article">
           <div class="feature-copy">
@@ -29,8 +29,8 @@
       {% endfor %}
     </section>
 
-    <section class="feature-panels" data-language="zh" aria-label="研究内容" hidden>
-      {% assign articles = site.research | where: "lang", "zh" %}
+    <section class="feature-panels" data-language="zh" aria-label="实验内容" hidden>
+      {% assign articles = site.experiments | where: "lang", "zh" %}
       {% for article in articles reversed %}
         <a class="feature-panel feature-panel-primary" href="{{ article.url | relative_url }}" aria-label="阅读文章">
           <div class="feature-copy">
@@ -42,5 +42,6 @@
   </main>
 
   <script src="../section-language.js"></script>
+  <script src="../disable-copy.js"></script>
 </body>
 </html>

@@ -160,13 +160,14 @@ a:focus-visible {
   min-height: 100vh;
   min-height: 100svh;
   display: block;
-  padding: clamp(28px, 3.2vw, 72px);
+  padding: clamp(20px, 2vw, 40px);
   overflow-x: hidden;
   background: #000000;
 }
 
 .feature-page {
-  width: min(82vw, 2200px);
+  width: 100%;
+  max-width: 2400px;
   margin: 0 auto;
 }
 
@@ -217,23 +218,31 @@ a:focus-visible {
 }
 
 .feature-panel {
-  /* 在现有基础上再次缩至 3/5，并同步压缩正文上下留白。 */
-  min-height: clamp(86px, 7.92vw, 202px);
+  min-height: clamp(116px, 8vw, 196px);
   overflow: hidden;
-  border: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--corner-radius);
-  /* 纵向定位提高到 58%，让铺满方框后的背景图片略微向上移动。 */
-  background: url("./BG_Essay.png") center 58% / cover no-repeat;
+  /* 渐变先压住背景两侧的杂色，再用内侧高光勾勒边缘，让方框精致但不过分抢眼。 */
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.34), rgba(0, 0, 0, 0.12) 50%, rgba(0, 0, 0, 0.34)),
+    url("./BG_Essay.png") center 58% / cover no-repeat;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -24px 48px rgba(0, 0, 0, 0.12);
   cursor: pointer;
   transition:
-    filter 0.2s ease,
-    box-shadow 0.2s ease;
+    filter 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
-/* 悬停时提高背景亮度，并用零偏移阴影在四周生成均匀发光。 */
+/* 悬停只改变光影，不移动或缩放方框，避免页面在指针经过时产生跳动。 */
 .feature-panel:hover {
-  filter: brightness(1.3);
-  box-shadow: 0 0 28px rgba(255, 255, 255, 0.24);
+  filter: brightness(1.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 10px 30px rgba(255, 255, 255, 0.12);
 }
 
 .feature-panel-primary {
@@ -242,27 +251,40 @@ a:focus-visible {
 }
 
 .feature-copy {
-  width: min(760px, 84%);
-  padding: clamp(8px, 1.08vw, 23px) clamp(24px, 3vw, 64px);
+  /* 放宽框内文字区域，让标题和序言优先保持完整，减少不必要的换行。 */
+  width: min(1200px, 92%);
+  padding: clamp(18px, 1.4vw, 32px) clamp(24px, 3vw, 64px);
   text-align: center;
 }
 
 .feature-preview h1 {
-  margin-bottom: clamp(10px, 1vw, 24px);
-  font-family: "Inter", "Microsoft YaHei", "PingFang SC", sans-serif;
-  font-size: clamp(28px, 2.2vw, 64px);
+  margin-bottom: 0;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: clamp(22px, 1.35vw, 38px);
   font-weight: 400;
-  font-style: italic;
-  line-height: 1.1;
-  letter-spacing: -0.04em;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+/* 短分隔线把标题与序言分成两层，比单纯依赖大间距更紧凑。 */
+.feature-preview h1::after {
+  content: "";
+  display: block;
+  width: clamp(28px, 2vw, 48px);
+  height: 1px;
+  margin: clamp(10px, 0.8vw, 16px) auto;
+  background: rgba(255, 255, 255, 0.28);
 }
 
 .feature-preview h5 {
   margin-bottom: 0;
+  color: rgba(255, 255, 255, 0.68);
   font-family: "Times New Roman", serif;
-  font-size: clamp(18px, 1.4vw, 42px);
+  font-size: clamp(16px, 1vw, 26px);
   font-weight: 300;
   font-style: italic;
+  line-height: 1.5;
 }
 
 /* 卡片只提取 Markdown 的一级、五级标题，其余正文留到阅读页完整展示。 */
@@ -276,7 +298,7 @@ html[lang="zh-CN"] .feature-preview h5 {
 
 @media (max-width: 600px) {
   .feature-body {
-    padding: 24px;
+    padding: 16px;
   }
 
   .feature-page {
@@ -304,12 +326,20 @@ html[lang="zh-CN"] .feature-preview h5 {
   min-height: 100vh;
   min-height: 100svh;
   display: block;
-  padding: clamp(28px, 5vw, 96px);
-  background: #000000;
+  padding: clamp(24px, 3vw, 64px);
+  background: #000000 url("./ReadBG_PC.png") center / cover no-repeat fixed;
+}
+
+/* 阅读页在竖屏时切换手机背景，避免横图被大幅裁切后失去主体。 */
+@media (max-aspect-ratio: 1 / 1) {
+  .article-body {
+    background-image: url("./ReadBG_Phone.png");
+  }
 }
 
 .article-page {
-  width: min(760px, 100%);
+  /* 放宽长文容器，同时保留适度留白，避免正文贴近屏幕边缘。 */
+  width: min(1080px, 100%);
   margin: 0 auto;
 }
 
@@ -333,8 +363,8 @@ html[lang="zh-CN"] .feature-preview h5 {
 
 .markdown-body {
   font-family: "Times New Roman", serif;
-  font-size: clamp(18px, 1.05vw, 24px);
-  line-height: 1.85;
+  font-size: clamp(19px, 1.1vw, 25px);
+  line-height: 1.78;
 }
 
 html[lang="zh-CN"] .markdown-body {
@@ -342,22 +372,23 @@ html[lang="zh-CN"] .markdown-body {
 }
 
 .markdown-body h1 {
-  margin-bottom: clamp(12px, 1.5vw, 28px);
+  margin-bottom: clamp(14px, 1.4vw, 26px);
   font-family: "Inter", "Microsoft YaHei", "PingFang SC", sans-serif;
-  font-size: clamp(48px, 5vw, 88px);
+  font-size: clamp(40px, 3.2vw, 64px);
   font-weight: 300;
   font-style: italic;
-  line-height: 1;
-  letter-spacing: -0.05em;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
 }
 
 .markdown-body h5 {
-  margin-bottom: clamp(44px, 6vw, 88px);
+  margin-bottom: clamp(32px, 4vw, 56px);
+  color: rgba(255, 255, 255, 0.72);
   font-family: "Times New Roman", serif;
-  font-size: clamp(20px, 1.4vw, 30px);
+  font-size: clamp(18px, 1.15vw, 26px);
   font-weight: 400;
   font-style: italic;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 html[lang="zh-CN"] .markdown-body h5 {
@@ -369,7 +400,7 @@ html[lang="zh-CN"] .markdown-body h5 {
 .markdown-body ol,
 .markdown-body blockquote,
 .markdown-body pre {
-  margin-bottom: 1.35em;
+  margin-bottom: 1.2em;
 }
 
 .markdown-body ul,
@@ -399,13 +430,44 @@ html[lang="zh-CN"] .markdown-body h5 {
   font-size: 0.9em;
 }
 
+/* 4K 屏幕拥有更多物理像素，单独放宽阅读区并放大文字，避免沿用 1080p 上限后内容缩在中央。 */
+@media (min-width: 2560px) {
+  .article-page {
+    width: min(1800px, 86vw);
+  }
+
+  .markdown-body {
+    font-size: clamp(26px, 0.8vw, 32px);
+  }
+
+  .markdown-body h1 {
+    font-size: clamp(64px, 2vw, 82px);
+  }
+
+  .markdown-body h5 {
+    margin-bottom: clamp(48px, 3vw, 72px);
+    font-size: clamp(26px, 0.85vw, 32px);
+  }
+}
+
 @media (max-width: 600px) {
   .article-body {
-    padding: 72px 24px 40px;
+    padding: 56px clamp(24px, 7vw, 32px) 36px;
   }
 
   .article-language-link {
     position: absolute;
+  }
+
+  .markdown-body h1 {
+    /* 手机屏幕优先保证日期类长标题完整呈现，避免只把最后一个字挤到下一行。 */
+    font-size: clamp(30px, 8vw, 36px);
+    line-height: 1.15;
+  }
+
+  .markdown-body h5 {
+    margin-bottom: 36px;
+    font-size: clamp(18px, 5.5vw, 22px);
   }
 }
 
@@ -442,7 +504,7 @@ html[lang="zh-CN"] .markdown-body h5 {
 
 .profile-links {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: clamp(20px, 4vw, 92px);
 }
 
@@ -452,19 +514,71 @@ html[lang="zh-CN"] .markdown-body h5 {
   place-items: center;
   padding: clamp(20px, 2vw, 48px);
   border-radius: var(--corner-radius);
-  transition:
-    background 0.2s ease,
-    transform 0.2s ease;
+  transition: background 0.2s ease;
 }
 
 .profile-link:hover {
   background: rgba(255, 255, 255, 0.12);
-  transform: translateY(-4px);
 }
 
 .profile-link img {
   width: clamp(27px, 2.5vw, 64px);
   height: clamp(27px, 2.5vw, 64px);
+}
+
+.profile-email {
+  appearance: none;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+.profile-email:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+.profile-email-icon {
+  width: clamp(27px, 2.5vw, 64px);
+  height: clamp(27px, 2.5vw, 64px);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+}
+
+/* 复制提示固定在视口顶部，以淡入淡出代替浏览器 alert，也不会推动页面布局。 */
+.copy-toast {
+  position: fixed;
+  top: clamp(20px, 3vw, 52px);
+  left: 50%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 12px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(12, 18, 17, 0.78);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  visibility: hidden;
+  translate: -50% 0;
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease;
+}
+
+.copy-toast.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.copy-toast-check {
+  color: #8ee7b2;
 }
 
 @media (max-aspect-ratio: 1 / 1) {
@@ -490,5 +604,11 @@ html[lang="zh-CN"] .markdown-body h5 {
 
   .profile-link {
     min-height: 120px;
+  }
+
+  .profile-email:last-child {
+    width: calc((100% - 20px) / 2);
+    grid-column: 1 / -1;
+    justify-self: center;
   }
 }
