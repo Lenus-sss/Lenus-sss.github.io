@@ -371,9 +371,13 @@ html[lang="zh-CN"] .feature-preview h5 {
 }
 
 .markdown-body {
+  /* 长代码或链接不能反向撑宽正文容器；容器固定留在当前视口内。 */
+  min-width: 0;
+  max-width: 100%;
   font-family: "Times New Roman", serif;
   font-size: clamp(19px, 1.1vw, 25px);
   line-height: 1.78;
+  overflow-wrap: anywhere;
 }
 
 html[lang="zh-CN"] .markdown-body {
@@ -437,6 +441,18 @@ html[lang="zh-CN"] .markdown-body h5 {
 .markdown-body code {
   font-family: Consolas, monospace;
   font-size: 0.9em;
+}
+
+.markdown-body pre {
+  /* 代码保持原始缩进，但只在代码框内部横向滚动，避免带动整张手机页面。 */
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+
+.markdown-body pre code {
+  white-space: pre;
+  overflow-wrap: normal;
 }
 
 /* 4K 屏幕拥有更多物理像素，单独放宽阅读区并放大文字，避免沿用 1080p 上限后内容缩在中央。 */

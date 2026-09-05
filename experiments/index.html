@@ -23,7 +23,16 @@
       {% for article in articles reversed %}
         <a class="feature-panel feature-panel-primary" href="{{ article.url | relative_url }}" aria-label="Read article">
           <div class="feature-copy">
-            <div class="feature-preview">{{ article.content | markdownify }}</div>
+            <div class="feature-preview">
+              {% comment %}新文章优先读取 Front Matter 标题，并从正文生成简短预览；旧文章没有 title 时仍沿用正文标题。{% endcomment %}
+              {% if article.title %}
+                {% assign article_summary = article.content | markdownify | strip_html | strip_newlines | truncate: 110 %}
+                <h1>{{ article.title }}</h1>
+                <h5>{{ article_summary }}</h5>
+              {% else %}
+                {{ article.content | markdownify }}
+              {% endif %}
+            </div>
           </div>
         </a>
       {% endfor %}
@@ -34,7 +43,16 @@
       {% for article in articles reversed %}
         <a class="feature-panel feature-panel-primary" href="{{ article.url | relative_url }}" aria-label="阅读文章">
           <div class="feature-copy">
-            <div class="feature-preview">{{ article.content | markdownify }}</div>
+            <div class="feature-preview">
+              {% comment %}中文列表使用同一套规则，保证双语文章切换后卡片结构一致。{% endcomment %}
+              {% if article.title %}
+                {% assign article_summary = article.content | markdownify | strip_html | strip_newlines | truncate: 110 %}
+                <h1>{{ article.title }}</h1>
+                <h5>{{ article_summary }}</h5>
+              {% else %}
+                {{ article.content | markdownify }}
+              {% endif %}
+            </div>
           </div>
         </a>
       {% endfor %}
